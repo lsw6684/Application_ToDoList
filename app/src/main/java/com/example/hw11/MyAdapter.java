@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<Todo> todoList;
+    private DBHelper dbHelper;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         protected TextView name;
@@ -20,8 +21,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.name = (TextView) itemView.findViewById(R.id.name);
-            this.bt_delete = (ImageButton) itemView.findViewById(R.id.bt_input);
+
+            dbHelper = DBHelper.getInstance(itemView.getContext());
+
+
+            this.name = itemView.findViewById(R.id.name);
+            this.bt_delete = itemView.findViewById(R.id.bt_delete);
             bt_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -30,6 +35,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                     //삭제된 포지션이 아닌 경우
                     if (position != RecyclerView.NO_POSITION) {
+                        String tmp = todoList.get(position).getTodoName();
+                        dbHelper.delete(tmp);
                         todoList.remove(position);
                         notifyDataSetChanged();
                     }
@@ -54,7 +61,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.name.setText(todoList.get(position).getTodoName());
+        String tmpName = todoList.get(position).getTodoName();
+
+
+        holder.name.setText(tmpName);
     }
 
     @Override

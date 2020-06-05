@@ -19,8 +19,7 @@
         android:inputType="textPersonName"
         android:maxLength="15"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-    />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_todo"

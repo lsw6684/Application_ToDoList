@@ -2,5 +2,5 @@
     <string name="app_name">20110118_이승원</string>
     <string name="et_input">할 일</string>
     <string name="tv_todo">Todo List</string>
-    <string name="bt_input">BUTTON</string>
+    <string name="bt_input">입력</string>
 </resources>
